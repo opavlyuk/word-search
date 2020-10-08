@@ -24,6 +24,12 @@ class TestMakeBoardPositive(unittest.TestCase):
             for el_id, el in enumerate(row):
                 yield el, el_id, row_id
 
+    def test_minimal_board(self):
+        self.assertTrue(make_board(1))
+
+    def test_big_board(self):
+        self.assertTrue(make_board(BOARD_SIZE * BOARD_SIZE))
+
     def test_board_is_iterable(self):
         self.assertIsIterable(self.board)
 
