@@ -1,19 +1,20 @@
 import unittest
 
 from src.board import make_board
-from src.main import BOARD_SIZE
 
 
-class TestMakeBoardPositive(unittest.TestCase):
+def assertIsIterable(obj, msg=None):
+    if msg is None:
+        msg = 'Object is not iterable.'
+    try:
+        (i for i in obj)
+    except TypeError:
+        raise AssertionError(msg)
+
+
+class TestSuiteMakeBoardPositive(unittest.TestCase):
+    BOARD_SIZE = 15
     board = make_board(BOARD_SIZE)
-
-    def assertIsIterable(self, obj, msg=None):
-        if msg is None:
-            msg = 'Object is not iterable.'
-        try:
-            (i for i in obj)
-        except TypeError:
-            raise AssertionError(msg)
 
     def _get_board_rows(self):
         for i, row in enumerate(self.board):
@@ -28,22 +29,23 @@ class TestMakeBoardPositive(unittest.TestCase):
         self.assertTrue(make_board(1))
 
     def test_big_board(self):
-        self.assertTrue(make_board(BOARD_SIZE * BOARD_SIZE))
+        self.assertTrue(make_board(self.BOARD_SIZE * self.BOARD_SIZE))
 
     def test_board_is_iterable(self):
-        self.assertIsIterable(self.board)
+        assertIsIterable(self.board)
 
     def test_rows_are_iterable(self):
         for row_id, row in self._get_board_rows():
-            self.assertIsIterable(row, f'Expected {row_id}th row to be iterable, actual got not.')
+            assertIsIterable(row, f'Expected {row_id}th row to be iterable, actual got not.')
 
     def test_vertical_size(self):
-        self.assertEqual(len(self.board), BOARD_SIZE)
+        self.assertEqual(len(self.board), self.BOARD_SIZE)
 
     def test_horizontal_size(self):
         for row_id, row in self._get_board_rows():
             row_len = len(row)
-            self.assertEqual(row_len, BOARD_SIZE, f'Row {row_id} expected length {BOARD_SIZE}, actual {row_len}.')
+            self.assertEqual(row_len, self.BOARD_SIZE, f'Row {row_id} expected length {self.BOARD_SIZE},'
+                                                       f' actual {row_len}.')
 
     def test_elements_type(self):
         elements = self._get_board_elements()
@@ -61,7 +63,7 @@ class TestMakeBoardPositive(unittest.TestCase):
                              f' got {el_id}th element {el} of length {el_len} in row {row_id}')
 
 
-class TestMakeBoardNegative(unittest.TestCase):
+class TestSuiteMakeBoardNegative(unittest.TestCase):
     def test_zero(self):
         self.assertRaises(AssertionError, make_board, 0)
 
