@@ -15,5 +15,5 @@ class TestSuiteAcceptanceCriteria(unittest.TestCase):
     def test_time(self):
         expected = 0.5
         exec_num = 100
-        t = timeit.timeit(lambda: search_words(self.ArgsMock), number=100)
+        t = timeit.timeit(lambda: search_words(self.ArgsMock), number=exec_num)
         self.assertLessEqual(t / exec_num, expected)
