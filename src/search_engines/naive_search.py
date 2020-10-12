@@ -82,4 +82,4 @@ def _iterate_board(board, word):
 def naive_search(words, board, *args):
     with Pool() as p_pool:
         results = p_pool.map(functools.partial(_iterate_board, board), words)
-    return [word for word in results if word]
+    return {word for word in results if word}
