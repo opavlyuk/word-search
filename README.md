@@ -6,7 +6,7 @@
 
 
 ## Prepare environment
-1. Clone the project and open work directory.
+1. Clone the project and move to its directory.
 
 ```
 $ git clone git@github.com:opavlyuk/word-search.git
