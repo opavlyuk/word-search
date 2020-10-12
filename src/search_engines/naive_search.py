@@ -8,14 +8,14 @@ def _forwards(i, j):
 
 def _backwards(i, j):
     new_j = j - 1
-    if new_j > 0:
+    if new_j >= 0:
         return i, new_j
     raise IndexError
 
 
 def _upwards(i, j):
     new_i = i - 1
-    if new_i > 0:
+    if new_i >= 0:
         return new_i, j
     raise IndexError
 
@@ -26,7 +26,7 @@ def _downwards(i, j):
 
 def _forward_upwards(i, j):
     new_i = i - 1
-    if new_i > 0:
+    if new_i >= 0:
         return new_i, j + 1
     raise IndexError
 
@@ -38,14 +38,14 @@ def _forward_downwards(i, j):
 def _back_upwards(i, j):
     new_i = i - 1
     new_j = j - 1
-    if new_i > 0 and new_j > 0:
+    if new_i >= 0 and new_j >= 0:
         return new_i, new_j
     raise IndexError
 
 
 def _back_downwards(i, j):
     new_j = j - 1
-    if new_j > 0:
+    if new_j >= 0:
         return i + 1, new_j
     raise IndexError
 
@@ -54,8 +54,9 @@ directions = (_forwards, _backwards, _upwards, _downwards,
               _forward_upwards, _forward_downwards, _back_upwards, _back_downwards)
 
 
-def track_word(n, word, i, j, board, direction):
-    found_word = ''
+def track_word(n, word, i, j, board, direction, found_word=None):
+    if found_word is None:
+        found_word = ''
     if word[n] == board[i][j]:
         found_word += word[n]
         if n == len(word) - 1:
@@ -78,7 +79,7 @@ def _iterate_board(board, word):
                     return word_found
 
 
-def naive_search(words, board):
+def naive_search(words, board, *args):
     with Pool() as p_pool:
         results = p_pool.map(functools.partial(_iterate_board, board), words)
     return [word for word in results if word]
