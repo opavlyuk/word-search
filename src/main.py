@@ -10,7 +10,8 @@ def search_words(args):
     return search(words, board, min_len, max_len)
 
 
-def main(args):
+def main():
+    args = parse_cl_args()
     found_words = search_words(args)
     if found_words:
         print('Words found:', ', '.join(found_words))
@@ -19,4 +20,4 @@ def main(args):
 
 
 if __name__ == '__main__':
-    main(parse_cl_args())
+    main()
