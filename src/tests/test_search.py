@@ -40,7 +40,7 @@ class TestSuiteSearch(BaseTestSuite):
 
     @staticmethod
     def get_all_combinations(seq):
-        return [''.join(seq[i:j]) for i, j in itertools.combinations(range(len(seq) + 1), r=2)]
+        return {''.join(seq[i:j]) for i, j in itertools.combinations(range(len(seq) + 1), r=2)}
 
     def test_horizontal(self):
         for i, row in enumerate(self.get_rows()):
