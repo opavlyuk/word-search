@@ -12,9 +12,6 @@ def preprocess_words(args):
         for word in get_words_from_file(args.dictionary_file):
             word = word
             word_len = len(word)
-            if word_len < min_len:
-                min_len = word_len
-            if word_len > max_len:
-                max_len = word_len
+            min_len, max_len = min(min_len, word_len), max(max_len, word_len)
             words.add(word)
     return words, min_len, max_len
