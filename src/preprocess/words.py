@@ -2,12 +2,10 @@ from src.helpers.file_dict_source import get_words_from_file
 
 
 def preprocess_words(args):
+    words = set()
     if args.words:
-        input_words = sorted(args.words, key=lambda x: len(x))
-        min_len, max_len = len(input_words[0]), len(input_words[-1])
-        words = set(input_words)
+        min_len, max_len = min(args.words, key=len), max(words, key=len)
     else:
-        words = set()
         min_len, max_len = float('inf'), 0
         for word in get_words_from_file(args.dictionary_file):
             word = word
