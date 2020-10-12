@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Python >= 3.6.10
+* Python >= 3.6.10
 
 
 ## Prepare environment
@@ -39,6 +39,6 @@ Execute the command-line script, check `help` for details:
 Execute unit tests:
 
 ```
-(venv) $ python -m unittest
+(venv) $ python -m unittest discover src/tests/
 
 ```
