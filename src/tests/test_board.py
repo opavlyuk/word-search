@@ -69,7 +69,3 @@ class TestSuiteMakeBoardNegative(unittest.TestCase):
 
     def test_negative(self):
         self.assertRaises(AssertionError, make_board, -1)
-
-
-if __name__ == '__main__':
-    unittest.main()
