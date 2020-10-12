@@ -59,9 +59,5 @@ def _pre_generate_char_seqs(board, min_len, max_len):
 
 
 def advanced_search(words, board, min_len, max_len):
-    words_found = []
     seqs = _pre_generate_char_seqs(board, min_len, max_len)
-    for word in words:
-        if word in seqs:
-            words_found.append(word)
-    return words_found
+    return seqs & words
