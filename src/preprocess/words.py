@@ -13,11 +13,12 @@ def preprocess_words(args):
     """
     words = set()
     if args.words:
-        min_len, max_len = min(args.words, key=len), max(words, key=len)
+        min_len = min(map(len, args.words))
+        max_len = max(map(len, args.words))
+        words = set(args.words)
     else:
         min_len, max_len = float('inf'), 0
         for word in get_words_from_file(args.dictionary_file):
-            word = word
             word_len = len(word)
             min_len, max_len = min(min_len, word_len), max(max_len, word_len)
             words.add(word)
