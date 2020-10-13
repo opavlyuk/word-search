@@ -6,8 +6,7 @@ from src.main import search_words
 
 
 class TestSuiteAcceptanceCriteria(unittest.TestCase):
-    class ArgsMock:
-        """Quick but ugly mock"""
+    class ArgsMock:  # Quick but ugly mock
         board_size = 15
         words = None
         dictionary_file = pathlib.Path(__file__).parent.parent.parent / 'data/words.txt'
