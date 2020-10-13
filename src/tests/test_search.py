@@ -42,38 +42,16 @@ class TestSuiteSearch(BaseTestSuite):
     def get_all_combinations(seq):
         return {''.join(seq[i:j]) for i, j in itertools.combinations(range(len(seq) + 1), r=2)}
 
-    def test_horizontal(self):
-        for i, row in enumerate(self.get_rows()):
-            expected = self.get_all_combinations(row)
-            with self.subTest(row_num=i):
-                self.assertEqual(
-                    expected,
-                    search(expected, self.board, self.MIN_WORD_LEN, self.MAX_WORD_LEN)
-                )
-
-    def test_vertical(self):
-        for i, col in enumerate(self.get_columns()):
-            expected = self.get_all_combinations(col)
-            with self.subTest(col=i):
-                self.assertEqual(
-                    expected,
-                    search(expected, self.board, self.MIN_WORD_LEN, self.MAX_WORD_LEN)
-                )
-
-    def test_ew_diagonals(self):
-        for i, diagonal in enumerate(self.get_ew_diagonals()):
-            expected = self.get_all_combinations(diagonal)
-            with self.subTest(diag=i):
-                self.assertEqual(
-                    expected,
-                    search(expected, self.board, self.MIN_WORD_LEN, self.MAX_WORD_LEN)
-                )
-
-    def test_we_diagonals(self):
-        for i, diagonal in enumerate(self.get_we_diagonals()):
-            expected = self.get_all_combinations(diagonal)
-            with self.subTest(diag=i):
-                self.assertEqual(
-                    expected,
-                    search(expected, self.board, self.MIN_WORD_LEN, self.MAX_WORD_LEN)
-                )
+    def test_existing_combinations(self):
+        spaces = zip(
+            ('rows', 'columns', 'ew_diagonals', 'we_diagonals'),
+            (self.get_rows(), self.get_columns(), self.get_ew_diagonals(), self.get_we_diagonals()),
+        )
+        for name, space in spaces:
+            for i, unit in enumerate(space):
+                expected = self.get_all_combinations(unit)
+                with self.subTest(space=name, unit_num=i):
+                    self.assertEqual(
+                        expected,
+                        search(expected, self.board, self.MIN_WORD_LEN, self.MAX_WORD_LEN)
+                    )
