@@ -3,7 +3,6 @@ from setuptools import setup
 
 setup(
     name="word-search",
-    # packages=["ltf2.util"],
     version="0.0.1",
     description="Search fow words in pre-generated 2d grid",
     author="Oleksandr Pavliuk",
